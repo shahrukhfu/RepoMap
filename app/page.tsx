@@ -9,6 +9,7 @@ import SetupGuide from "@/components/SetupGuide";
 import DependencyAudit from "@/components/DependencyAudit";
 import AiChatDrawer from "@/components/AiChatDrawer";
 import { Download } from "lucide-react";
+import Galaxy from "@/components/Galaxy";
 
 interface IAnalysisResult {
   _id: string;
@@ -262,8 +263,27 @@ export default function Home() {
     <div className="flex flex-col h-screen overflow-hidden bg-background">
       <Navbar onAnalyze={handleAnalyze} isLoading={isLoading} currentUrl={url} showInput={false} />
 
+      {/* Galaxy Background Animation */}
+      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none bg-background">
+        <div className="w-full h-full relative">
+          <Galaxy
+            starSpeed={0.5}
+            density={1}
+            hueShift={140}
+            speed={1}
+            glowIntensity={0.3}
+            saturation={0}
+            mouseRepulsion={false}
+            repulsionStrength={2}
+            twinkleIntensity={0.3}
+            rotationSpeed={0.1}
+            transparent={false}
+          />
+        </div>
+      </div>
+
       {/* Background Decoration Shaders */}
-      <div className="fixed inset-0 pointer-events-none opacity-40">
+      <div className="fixed inset-0 pointer-events-none opacity-40 z-[5]">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[120px]"></div>
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px]"></div>
       </div>
