@@ -7,7 +7,7 @@ import { synthesizeRepo } from "@/lib/gemini";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { url } = body;
+    const { url, forceRefresh } = body;
 
     if (!url) {
       return NextResponse.json({ error: "GitHub URL is required" }, { status: 400 });
@@ -23,13 +23,15 @@ export async function POST(req: NextRequest) {
     // Connect to database
     await dbConnect();
 
-    // Check for cached result within 24 hours
+    // Check for cached result within 24 hours (unless forceRefresh is true)
     const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
-    const cachedAnalysis = await RepoAnalysis.findOne({
-      owner: owner.toLowerCase(),
-      repo: repo.toLowerCase(),
-      updatedAt: { $gte: oneDayAgo },
-    });
+    const cachedAnalysis = forceRefresh
+      ? null
+      : await RepoAnalysis.findOne({
+          owner: owner.toLowerCase(),
+          repo: repo.toLowerCase(),
+          updatedAt: { $gte: oneDayAgo },
+        });
 
     if (cachedAnalysis) {
       console.log(`Using cached analysis for ${owner}/${repo}`);

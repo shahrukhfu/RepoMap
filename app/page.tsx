@@ -32,6 +32,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<"overview" | "setup" | "security">("overview");
   const [history, setHistory] = useState<IHistoryItem[]>([]);
   const [errorMsg, setErrorMsg] = useState("");
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   // Load history from localStorage
   useEffect(() => {
@@ -113,6 +114,33 @@ export default function Home() {
     document.body.removeChild(link);
   };
 
+  const handleRefresh = async () => {
+    if (!analysisData) return;
+    setIsRefreshing(true);
+    try {
+      const targetUrl = `https://github.com/${analysisData.owner}/${analysisData.repo}`;
+      const res = await fetch("/api/analyze", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ url: targetUrl, forceRefresh: true }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data._id) {
+        setAnalysisData(data);
+      } else {
+        alert(data.error || "Failed to refresh codebase analysis.");
+      }
+    } catch (err) {
+      alert("An unexpected network error occurred while refreshing.");
+    } finally {
+      setIsRefreshing(false);
+    }
+  };
+
   // State A: Active Loading Console Screen
   if (isLoading) {
     return (
@@ -185,7 +213,17 @@ export default function Home() {
               </div>
 
               {/* Action buttons */}
-              <div className="ml-auto flex items-center gap-4">
+              <div className="ml-auto flex items-center gap-3">
+                <button
+                  onClick={handleRefresh}
+                  disabled={isRefreshing}
+                  className="flex items-center gap-2 px-3 py-1.5 border border-outline-variant hover:bg-surface-container-highest rounded text-label-sm font-medium transition-all text-white bg-surface-container cursor-pointer disabled:opacity-50"
+                >
+                  <span className={`material-symbols-outlined text-[16px] ${isRefreshing ? "animate-spin" : ""}`}>
+                    refresh
+                  </span>
+                  <span>{isRefreshing ? "Refreshing..." : "Refresh"}</span>
+                </button>
                 <button
                   onClick={handleExportReport}
                   className="flex items-center gap-2 px-3 py-1.5 border border-outline-variant hover:bg-surface-container-highest rounded text-label-sm font-medium transition-all text-white bg-surface-container cursor-pointer"
