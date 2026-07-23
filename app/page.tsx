@@ -34,6 +34,7 @@ export default function Home() {
   const [history, setHistory] = useState<IHistoryItem[]>([]);
   const [errorMsg, setErrorMsg] = useState("");
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [showExportDropdown, setShowExportDropdown] = useState(false);
 
   // Load history from localStorage
   useEffect(() => {
@@ -102,17 +103,141 @@ export default function Home() {
     localStorage.setItem("repomap_history", JSON.stringify(updatedHistory));
   };
 
-  const handleExportReport = () => {
+  const handleExportFormat = (format: "json" | "md" | "csv" | "html" | "pdf") => {
     if (!analysisData) return;
-    const jsonStr = JSON.stringify(analysisData, null, 2);
-    const blob = new Blob([jsonStr], { type: "application/json" });
+
+    let content = "";
+    let mimeType = "";
+    let fileExtension = "";
+
+    const {
+      owner,
+      repo,
+      projectTitle,
+      laymanSummary,
+      techStack,
+      architectureSummary,
+      folderBreakdown,
+      setupSteps,
+      securityAlerts,
+    } = analysisData;
+
+    if (format === "json") {
+      content = JSON.stringify(analysisData, null, 2);
+      mimeType = "application/json";
+      fileExtension = "json";
+    } else if (format === "md") {
+      content = `# ${projectTitle} (${owner}/${repo})
+
+## 💡 Layman Summary
+${laymanSummary || "No layman summary generated."}
+
+## 🌟 Tech Stack
+${techStack.map((t) => `- ${t}`).join("\n")}
+
+## 📐 Architecture Summary
+${architectureSummary}
+
+## 📂 Key Directory Layout
+${folderBreakdown.map((f) => `### ${f.path}\n${f.purpose}`).join("\n\n")}
+
+## 🛠️ Setup Guide
+${setupSteps.map((s, i) => `${i + 1}. ${s}`).join("\n")}
+
+## 🛡️ Dependency Audit
+| Package | Risk Level | Recommendation |
+|---|---|---|
+${securityAlerts.map((a) => `| ${a.package} | ${a.riskLevel.toUpperCase()} | ${a.recommendation} |`).join("\n")}
+`;
+      mimeType = "text/markdown";
+      fileExtension = "md";
+    } else if (format === "csv") {
+      const csvLines = [
+        `"RepoMap Analysis Report","${owner}/${repo}"`,
+        `"Project Title","${projectTitle}"`,
+        `"Layman Summary","${(laymanSummary || "").replace(/"/g, '""')}"`,
+        "",
+        `"Module Path","Responsibility"`,
+        ...folderBreakdown.map((f) => `"${f.path}","${f.purpose.replace(/"/g, '""')}"`),
+        "",
+        `"Package","Risk Level","Recommendation"`,
+        ...securityAlerts.map((a) => `"${a.package}","${a.riskLevel}","${a.recommendation.replace(/"/g, '""')}"`),
+      ];
+      content = csvLines.join("\n");
+      mimeType = "text/csv";
+      fileExtension = "csv";
+    } else if (format === "html") {
+      content = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${projectTitle} - RepoMap Report</title>
+  <style>
+    body { background: #09090b; color: #e5e2e1; font-family: system-ui, -apple-system, sans-serif; padding: 2rem; max-width: 900px; margin: 0 auto; line-height: 1.6; }
+    h1 { font-size: 2.5rem; border-bottom: 2px solid #27272a; padding-bottom: 1rem; color: #ffffff; }
+    h2 { font-size: 1.5rem; color: #ffffff; margin-top: 2rem; border-bottom: 1px solid #27272a; padding-bottom: 0.5rem; }
+    h3 { font-size: 1.1rem; color: #ffffff; margin-top: 1.5rem; }
+    .badge { display: inline-block; background: #201f1f; border: 1px solid #444748; color: #ffffff; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.85rem; margin-right: 0.5rem; margin-bottom: 0.5rem; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { border: 1px solid #444748; padding: 0.75rem; text-align: left; }
+    th { background: #1c1b1b; color: #ffffff; }
+    ul, ol { padding-left: 1.5rem; }
+    li { margin-bottom: 0.5rem; }
+    pre { background: #141313; border: 1px solid #444748; padding: 1rem; border-radius: 6px; overflow-x: auto; font-family: monospace; }
+  </style>
+</head>
+<body>
+  <h1>${projectTitle} Report</h1>
+  <p style="color: #c4c7c8;">Analyzed repository: <strong>github.com/${owner}/${repo}</strong></p>
+  
+  <h2>Layman Summary</h2>
+  <p>${laymanSummary || "No layman summary generated."}</p>
+  
+  <h2>Tech Stack</h2>
+  <div style="margin-top: 1rem;">${techStack.map((t) => `<span class="badge">${t}</span>`).join("")}</div>
+  
+  <h2>Architecture Summary</h2>
+  <p style="white-space: pre-line;">${architectureSummary}</p>
+  
+  <h2>Key Directory Layout</h2>
+  <ul>
+    ${folderBreakdown.map((f) => `<li><strong>${f.path}</strong>: ${f.purpose}</li>`).join("")}
+  </ul>
+  
+  <h2>Setup Guide</h2>
+  <ol>
+    ${setupSteps.map((s) => `<li>${s}</li>`).join("")}
+  </ol>
+  
+  <h2>Security Dependency Audit</h2>
+  <table>
+    <thead>
+      <tr><th>Package</th><th>Risk Level</th><th>Recommendation</th></tr>
+    </thead>
+    <tbody>
+      ${securityAlerts.map((a) => `<tr><td><strong>${a.package}</strong></td><td style="color: ${a.riskLevel === "high" ? "#ffb4ab" : a.riskLevel === "medium" ? "#e5e2e1" : "#c4c7c8"};">${a.riskLevel.toUpperCase()}</td><td>${a.recommendation}</td></tr>`).join("")}
+    </tbody>
+  </table>
+</body>
+</html>`;
+      mimeType = "text/html";
+      fileExtension = "html";
+    } else if (format === "pdf") {
+      setShowExportDropdown(false);
+      window.print();
+      return;
+    }
+
+    const blob = new Blob([content], { type: mimeType });
     const downloadUrl = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = downloadUrl;
-    link.download = `repomap_${analysisData.owner}_${analysisData.repo}.json`;
+    link.download = `repomap_${owner}_${repo}.${fileExtension}`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    setShowExportDropdown(false);
   };
 
   const handleRefresh = async () => {
@@ -225,13 +350,54 @@ export default function Home() {
                   </span>
                   <span>{isRefreshing ? "Refreshing..." : "Refresh"}</span>
                 </button>
-                <button
-                  onClick={handleExportReport}
-                  className="flex items-center gap-2 px-3 py-1.5 border border-outline-variant hover:bg-surface-container-highest rounded text-label-sm font-medium transition-all text-white bg-surface-container cursor-pointer"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  <span>Export Report</span>
-                </button>
+                <div className="relative">
+                  <button
+                    onClick={() => setShowExportDropdown(!showExportDropdown)}
+                    className="flex items-center gap-2 px-3 py-1.5 border border-outline-variant hover:bg-surface-container-highest rounded text-label-sm font-medium transition-all text-white bg-surface-container cursor-pointer select-none"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span>Export Report</span>
+                  </button>
+                  {showExportDropdown && (
+                    <div className="absolute right-0 mt-2 w-48 bg-surface-container border border-outline-variant rounded-lg shadow-xl z-[100] flex flex-col py-1 overflow-hidden">
+                      <button
+                        onClick={() => handleExportFormat("json")}
+                        className="px-4 py-2 hover:bg-surface-container-highest text-left text-[12px] text-on-surface-variant hover:text-white transition-colors flex items-center gap-2 cursor-pointer w-full bg-transparent border-none"
+                      >
+                        <span className="material-symbols-outlined text-[16px] text-on-surface-variant">code</span>
+                        <span>JSON (.json)</span>
+                      </button>
+                      <button
+                        onClick={() => handleExportFormat("md")}
+                        className="px-4 py-2 hover:bg-surface-container-highest text-left text-[12px] text-on-surface-variant hover:text-white transition-colors flex items-center gap-2 cursor-pointer w-full bg-transparent border-none"
+                      >
+                        <span className="material-symbols-outlined text-[16px] text-on-surface-variant">article</span>
+                        <span>Markdown (.md)</span>
+                      </button>
+                      <button
+                        onClick={() => handleExportFormat("html")}
+                        className="px-4 py-2 hover:bg-surface-container-highest text-left text-[12px] text-on-surface-variant hover:text-white transition-colors flex items-center gap-2 cursor-pointer w-full bg-transparent border-none"
+                      >
+                        <span className="material-symbols-outlined text-[16px] text-on-surface-variant">html</span>
+                        <span>HTML (.html)</span>
+                      </button>
+                      <button
+                        onClick={() => handleExportFormat("csv")}
+                        className="px-4 py-2 hover:bg-surface-container-highest text-left text-[12px] text-on-surface-variant hover:text-white transition-colors flex items-center gap-2 cursor-pointer w-full bg-transparent border-none"
+                      >
+                        <span className="material-symbols-outlined text-[16px] text-on-surface-variant">table_chart</span>
+                        <span>Spreadsheet (.csv)</span>
+                      </button>
+                      <button
+                        onClick={() => handleExportFormat("pdf")}
+                        className="px-4 py-2 hover:bg-surface-container-highest text-left text-[12px] text-on-surface-variant hover:text-white transition-colors flex items-center gap-2 cursor-pointer w-full bg-transparent border-none"
+                      >
+                        <span className="material-symbols-outlined text-[16px] text-on-surface-variant">picture_as_pdf</span>
+                        <span>PDF Document (.pdf)</span>
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
             </nav>
 
