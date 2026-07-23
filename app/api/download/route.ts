@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
 import RepoAnalysis from "@/models/RepoAnalysis";
 
@@ -9,13 +9,13 @@ export async function GET(req: NextRequest) {
     const format = searchParams.get("format");
 
     if (!id || !format) {
-      return new Response("Missing id or format parameters", { status: 400 });
+      return new NextResponse("Missing id or format parameters", { status: 400 });
     }
 
     await dbConnect();
     const analysis = await RepoAnalysis.findById(id);
     if (!analysis) {
-      return new Response("Codebase analysis not found", { status: 404 });
+      return new NextResponse("Codebase analysis not found", { status: 404 });
     }
 
     let content = "";
@@ -138,13 +138,14 @@ ${securityAlerts.map((a) => `| ${a.package} | ${a.riskLevel.toUpperCase()} | ${a
     }
 
     const filename = `repomap_${owner}_${repo}.${fileExtension}`;
-    return new Response(content, {
+    return new NextResponse(content, {
       headers: {
         "Content-Type": mimeType,
         "Content-Disposition": `attachment; filename="${filename}"`,
+        "Access-Control-Expose-Headers": "Content-Disposition",
       },
     });
   } catch (error: any) {
-    return new Response(error.message || "Failed to generate download file", { status: 500 });
+    return new NextResponse(error.message || "Failed to generate download file", { status: 500 });
   }
 }
