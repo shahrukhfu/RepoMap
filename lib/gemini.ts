@@ -11,6 +11,7 @@ const ai = new GoogleGenAI({ apiKey });
 export interface IRepoSynthesis {
   projectTitle: string;
   techStack: string[];
+  laymanSummary: string;
   architectureSummary: string;
   folderBreakdown: { path: string; purpose: string }[];
   setupSteps: string[];
@@ -45,6 +46,7 @@ Analyze the provided repository tree and configuration files. Output ONLY a vali
 {
   "projectTitle": "string",
   "techStack": ["string"],
+  "laymanSummary": "A summary of what this project does and what problem it solves, written in very simple and easy-to-understand words for a layperson or client. You may use basic, easy-to-digest technical terms (e.g. database, server, client, user interface) where necessary, but keep it high-level, clear, and engaging.",
   "architectureSummary": "string",
   "folderBreakdown": [{ "path": "string", "purpose": "string" }],
   "setupSteps": ["string"],
@@ -58,7 +60,7 @@ Analyze the provided repository tree and configuration files. Output ONLY a vali
       contents: prompt,
       config: {
         responseMimeType: "application/json",
-        systemInstruction: "You are an expert software architect. Analyze codebases and extract setup guides, technology stacks, file layouts, and potential dependency risks. You must output valid JSON matching the schema strictly.",
+        systemInstruction: "You are an expert software architect. Analyze codebases and extract setup guides, technology stacks, file layouts, a layman summary of what the codebase does, and potential dependency risks. You must output valid JSON matching the schema strictly.",
       },
     });
 
@@ -69,6 +71,7 @@ Analyze the provided repository tree and configuration files. Output ONLY a vali
     return {
       projectTitle: data.projectTitle || `${owner}/${repo}`,
       techStack: Array.isArray(data.techStack) ? data.techStack : [],
+      laymanSummary: data.laymanSummary || "No layman summary generated.",
       architectureSummary: data.architectureSummary || "No architecture summary generated.",
       folderBreakdown: Array.isArray(data.folderBreakdown) ? data.folderBreakdown : [],
       setupSteps: Array.isArray(data.setupSteps) ? data.setupSteps : [],

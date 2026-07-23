@@ -16,6 +16,7 @@ interface IAnalysisResult {
   repo: string;
   projectTitle: string;
   techStack: string[];
+  laymanSummary?: string;
   architectureSummary: string;
   folderBreakdown: { path: string; purpose: string }[];
   setupSteps: string[];
@@ -201,6 +202,7 @@ export default function Home() {
                 <ArchitectureOverview
                   summary={analysisData.architectureSummary}
                   folders={analysisData.folderBreakdown}
+                  laymanSummary={analysisData.laymanSummary}
                 />
               )}
               {activeTab === "setup" && <SetupGuide steps={analysisData.setupSteps} />}

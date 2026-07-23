@@ -89,6 +89,7 @@ export async function POST(req: NextRequest) {
         repo: repo.toLowerCase(),
         projectTitle: synthesis.projectTitle,
         techStack: synthesis.techStack,
+        laymanSummary: synthesis.laymanSummary,
         architectureSummary: synthesis.architectureSummary,
         folderBreakdown: synthesis.folderBreakdown,
         setupSteps: synthesis.setupSteps,

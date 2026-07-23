@@ -16,6 +16,7 @@ export interface IRepoAnalysis extends Document {
   repo: string;
   projectTitle: string;
   techStack: string[];
+  laymanSummary?: string;
   architectureSummary: string;
   folderBreakdown: IFolderBreakdown[];
   setupSteps: string[];
@@ -41,6 +42,7 @@ const RepoAnalysisSchema = new Schema<IRepoAnalysis>(
     repo: { type: String, required: true, index: true },
     projectTitle: { type: String, required: true },
     techStack: { type: [String], required: true },
+    laymanSummary: { type: String, required: false, default: "" },
     architectureSummary: { type: String, required: true },
     folderBreakdown: { type: [FolderBreakdownSchema], required: true },
     setupSteps: { type: [String], required: true },
