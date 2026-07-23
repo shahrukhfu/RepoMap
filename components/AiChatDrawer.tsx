@@ -110,7 +110,7 @@ export default function AiChatDrawer({ repoId, repoTitle }: AiChatDrawerProps) {
           {/* Header Bar */}
           <div className="px-6 py-3 bg-surface-container border-b border-outline-variant flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-secondary text-[18px]">psychology</span>
+              <span className="material-symbols-outlined text-on-surface-variant text-[18px]">psychology</span>
               <span className="font-label-sm text-primary font-bold">Repo Assistant ({repoTitle})</span>
             </div>
             <div className="flex gap-4">
@@ -147,7 +147,7 @@ export default function AiChatDrawer({ repoId, repoTitle }: AiChatDrawerProps) {
                       className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 border ${
                         msg.role === "user"
                           ? "bg-primary-container text-on-primary-container border-outline-variant"
-                          : "bg-secondary-container text-on-secondary-container border-secondary/30"
+                          : "bg-surface-container-high text-on-surface-variant border-outline-variant/30"
                       }`}
                     >
                       {msg.role === "user" ? (
@@ -176,7 +176,7 @@ export default function AiChatDrawer({ repoId, repoTitle }: AiChatDrawerProps) {
 
                 {isSending && (
                   <div className="flex gap-3 mr-auto max-w-[85%] animate-pulse">
-                    <div className="w-7 h-7 rounded-full bg-secondary-container text-on-secondary-container border border-secondary/30 flex items-center justify-center">
+                    <div className="w-7 h-7 rounded-full bg-surface-container-high text-on-surface-variant border border-outline-variant/30 flex items-center justify-center">
                       <span className="material-symbols-outlined text-xs">psychology</span>
                     </div>
                     <div className="p-3 bg-surface-container-low text-on-surface-variant/40 border border-outline-variant/30 rounded-lg font-sans">
@@ -205,7 +205,7 @@ export default function AiChatDrawer({ repoId, repoTitle }: AiChatDrawerProps) {
               <form onSubmit={handleFormSubmit} className="p-4 border-t border-outline-variant bg-[#09090b]">
                 <div className="relative group">
                   <div className="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant flex items-center">
-                    <Sparkles className="w-4 h-4 text-secondary animate-pulse-slow" />
+                    <Sparkles className="w-4 h-4 text-on-surface-variant animate-pulse-slow" />
                   </div>
                   <input
                     type="text"
