@@ -153,7 +153,7 @@ export default function RepoInput({ onAnalyze, isLoading, initialUrl = "", compa
     <div className="w-full max-w-3xl text-center flex flex-col items-center gap-6">
       {/* Badge / Micro-content */}
       <div className="flex items-center gap-2 px-3 py-1 rounded-full border border-outline-variant bg-surface-container-low mb-2 animate-fade-in">
-        <span className="material-symbols-outlined text-[14px] text-secondary" style={{ fontVariationSettings: "'FILL' 1" }}>
+        <span className="material-symbols-outlined text-[14px] text-on-surface-variant" style={{ fontVariationSettings: "'FILL' 1" }}>
           psychology
         </span>
         <span className="font-label-sm text-label-sm text-on-surface-variant">

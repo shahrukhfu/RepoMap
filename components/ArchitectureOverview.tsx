@@ -27,14 +27,14 @@ export default function ArchitectureOverview({ summary, folders, laymanSummary }
       <div className="max-w-5xl mx-auto space-y-8">
         {/* Layman Summary Box */}
         {laymanSummary && (
-          <section className="relative overflow-hidden bg-surface-container border border-secondary/20 rounded-xl p-6 group">
+          <section className="relative overflow-hidden bg-surface-container border border-outline-variant/30 rounded-xl p-6 group">
             {/* Ambient background glow */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/5 blur-[100px] -mr-32 -mt-32"></div>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/3 blur-[80px] -mr-32 -mt-32"></div>
 
             <div className="flex items-start gap-4 relative z-10">
-              <div className="w-12 h-12 rounded-lg bg-surface-container-high border border-secondary/50 flex items-center justify-center shrink-0">
+              <div className="w-12 h-12 rounded-lg bg-surface-container-high border border-outline-variant flex items-center justify-center shrink-0">
                 <span
-                  className="material-symbols-outlined text-secondary text-2xl"
+                  className="material-symbols-outlined text-on-surface-variant text-2xl"
                   style={{ fontVariationSettings: "'FILL' 1" }}
                 >
                   visibility
@@ -43,7 +43,7 @@ export default function ArchitectureOverview({ summary, folders, laymanSummary }
               <div className="space-y-3 flex-grow">
                 <div className="flex items-center gap-2">
                   <h3 className="font-headline-sm text-headline-sm text-primary">Layman Summary</h3>
-                  <span className="bg-secondary/25 text-secondary text-[10px] font-bold px-1.5 py-0.5 rounded border border-secondary/40 uppercase tracking-tighter">
+                  <span className="bg-surface-container-high text-on-surface-variant text-[10px] font-bold px-1.5 py-0.5 rounded border border-outline-variant/55 uppercase tracking-tighter">
                     Quick Explanation
                   </span>
                 </div>
