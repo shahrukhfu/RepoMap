@@ -281,15 +281,23 @@ export default function Home() {
             {/* Tab panel canvas */}
             <div className="flex-1 flex flex-col overflow-hidden pb-24">
               {activeTab === "overview" && (
-                <ArchitectureOverview
-                  summary={analysisData.architectureSummary}
-                  folders={analysisData.folderBreakdown}
-                  laymanSummary={analysisData.laymanSummary}
-                />
+                <div className="flex-1 flex flex-col overflow-hidden animate-fade-in">
+                  <ArchitectureOverview
+                    summary={analysisData.architectureSummary}
+                    folders={analysisData.folderBreakdown}
+                    laymanSummary={analysisData.laymanSummary}
+                  />
+                </div>
               )}
-              {activeTab === "setup" && <SetupGuide steps={analysisData.setupSteps} />}
+              {activeTab === "setup" && (
+                <div className="flex-1 flex flex-col overflow-hidden animate-fade-in">
+                  <SetupGuide steps={analysisData.setupSteps} />
+                </div>
+              )}
               {activeTab === "security" && (
-                <DependencyAudit alerts={analysisData.securityAlerts} techStack={analysisData.techStack} />
+                <div className="flex-1 flex flex-col overflow-hidden animate-fade-in">
+                  <DependencyAudit alerts={analysisData.securityAlerts} techStack={analysisData.techStack} />
+                </div>
               )}
             </div>
 

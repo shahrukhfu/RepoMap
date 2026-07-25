@@ -1,4 +1,4 @@
-# 🗺️ RepoMap
+# RepoMap
 
 <div align="center">
 
@@ -15,29 +15,29 @@
 
 ---
 
-## 📷 App in Action (Screenshots)
+## App in Action (Screenshots)
 
-Below are preview mockups of RepoMap's dark-mode dashboard interfaces, highlighting the modern glassmorphism aesthetic and interactive controls.
+Below are the actual screenshots of RepoMap's dark-mode dashboard interfaces in action, highlighting the modern glassmorphism aesthetic and interactive controls.
 
 ### 1. Codebase Overview Dashboard
-*Features the tech stack overview, interactive layman summary, and a directory layout mapping table, all overlaying an animated WebGL star field.*
+Features the tech stack overview, interactive layman summary, and a directory layout mapping table, all overlaying an animated WebGL star field.
 ![Dashboard Overview](./public/dashboard_overview.png)
 
-### 2. Local Setup Guide
-*Presents a sequential installation procedure with formatted code boxes and individual copy utilities.*
-![Setup Guide](./public/installation_guide.png)
+### 2. Dependency Risk Assessment
+Audits packages and highlights detected vulnerabilities with description details and severity markers.
+![Dependency Risk Assessment](./public/security_audit.png)
 
 ### 3. Interactive QA Chat Assistant
-*An active conversational AI drawer docked to the screen, allowing users to query codebase components, logic, and patterns.*
+An active conversational AI drawer docked to the screen, allowing users to query codebase components, logic, and patterns.
 ![AI Assistant Chat](./public/ai_chat_drawer.png)
 
 ---
 
-## 💡 The Real-World Problem & Solution
+## The Real-World Problem and Solution
 
 ### The Problem
 * **Onboarding friction**: When developers join a new project, they spend hours or days scanning directories, reading package config manifests, and trying to deduce where logic resides and how to compile the environment.
-* **Non-technical opacity**: Project managers, clients, or product designers struggle to understand what a codebase *actually* does or what tech stack it uses since standard `README.md` documents are often missing, outdated, or written in overly complex terminology.
+* **Non-technical opacity**: Project managers, clients, or product designers struggle to understand what a codebase actually does or what tech stack it uses since standard documentation is often missing, outdated, or written in overly complex terminology.
 * **Hidden security vulnerabilities**: High-risk packages are often left nested in developer dependencies without audits, leaving the project exposed.
 
 ### The Solution
@@ -50,23 +50,24 @@ Below are preview mockups of RepoMap's dark-mode dashboard interfaces, highlight
 
 ---
 
-## ✨ Features List
+## Features List
 
-* 🔍 **GitHub Tree Parsing & Manifest Indexing**: Fetch, filter, and parse file structures and root-level configuration manifests via the GitHub REST API.
-* 🧠 **AI-Powered Codebase Synthesis**: Multi-dimensional analysis powered by Google's Gemini API, producing titles, technical stack logs, structured guides, and threat scopes.
-* 🛡️ **Dependency Risk Auditing**: Scans parsed manifests to identify high-risk package versions and provides direct terminal commands to patch them.
-* ⚡ **Smart Cache Architecture**: Automatically caches repo analyses inside MongoDB Atlas for 24 hours, ensuring lightning-fast load times.
-* 🤖 **Conversational QA Chat Drawer**: A persistent AI bot equipped with the context of the repository structure to answer queries in markdown format.
-* 📋 **Multi-Format Export Utilities**: Download full codebase audit reports in PDF, HTML, Markdown (.md), JSON, or Spreadsheet (.csv) configurations.
-* 🌌 **Premium Animated UI**: Curated dark-themed layout built with Tailwind CSS, Outfit fonts, Glassmorphic headers, and a WebGL 3D rotating star field.
+* **GitHub Tree Parsing and Manifest Indexing**: Fetch, filter, and parse file structures and root-level configuration manifests via the GitHub REST API.
+* **AI-Powered Codebase Synthesis**: Multi-dimensional analysis powered by Google's Gemini API, producing titles, technical stack logs, structured guides, and threat scopes.
+* **Dependency Risk Auditing**: Scans parsed manifests to identify high-risk package versions and provides direct terminal commands to patch them.
+* **Smart Cache Architecture**: Automatically caches repo analyses inside MongoDB Atlas for 24 hours, ensuring lightning-fast load times.
+* **Conversational QA Chat Drawer**: A persistent AI bot equipped with the context of the repository structure to answer queries in markdown format.
+* **Multi-Format Export Utilities**: Download full codebase audit reports in PDF, HTML, Markdown (.md), JSON, or Spreadsheet (.csv) configurations.
+* **Premium Animated UI**: Curated dark-themed layout built with Tailwind CSS, Outfit fonts, Glassmorphic headers, and an interactive rotating WebGL star field.
+* **Smooth Panel Transitions**: Custom CSS cubic-bezier fade-in translate animations designed to transition between content screens seamlessly when tabs are changed.
 
 ---
 
-## 🤖 The AI Architecture & Prompt Engineering
+## The AI Architecture and Prompt Engineering
 
 RepoMap implements two distinct AI roles using the `gemini-2.5-flash` model.
 
-### 1. Codebase Synthesizer & Architect
+### 1. Codebase Synthesizer and Architect
 This module processes the repository's file tree and configuration manifests to generate a structured analysis payload.
 
 * **Trigger Location**: [lib/gemini.ts:synthesizeRepo](file:///d:/ACTAI%20Final%20Project/lib/gemini.ts#L21-L84)
@@ -98,20 +99,20 @@ This module powers the interactive chat drawer, helping developers find applicat
 
 ---
 
-## 🛠️ Stack, Services & Tools
+## Stack, Services and Tools
 
 RepoMap is built using modern cloud solutions and frameworks:
 
 * **Core Framework**: [Next.js 16 (App Router)](https://nextjs.org/) & [React 19](https://react.dev/)
 * **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) & [Lucide Icons](https://lucide.dev/)
-* **WebGL Graphics**: [OGL](https://github.com/oopsaune/ogl) *(Used for the interactive rotating star field)*
+* **WebGL Graphics**: [OGL](https://github.com/oopsaune/ogl) (Used for the interactive rotating star field)
 * **Database**: [MongoDB Atlas](https://www.mongodb.com/atlas/database) & [Mongoose ORM](https://mongoosejs.com/)
 * **AI Model Engine**: [Google Gen AI SDK (`@google/genai`)](https://github.com/google/generative-ai-js) using `gemini-2.5-flash`
 * **Hosting Platform**: [Vercel](https://vercel.com/)
 
 ---
 
-## 🚀 How to Run locally
+## How to Run locally
 
 ### 1. Clone the repository
 ```bash
