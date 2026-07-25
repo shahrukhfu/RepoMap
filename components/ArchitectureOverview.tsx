@@ -61,7 +61,7 @@ export default function ArchitectureOverview({ summary, folders, laymanSummary }
               Architecture Summary
             </h3>
             <span className="px-2 py-0.5 border-base text-[10px] font-code-md text-on-surface-variant rounded">
-              GEMINI SYNTHESIS
+              Architecture
             </span>
           </div>
           <div className="p-6 font-mono text-code-md leading-relaxed text-[#A1A1AA] whitespace-pre-line">
