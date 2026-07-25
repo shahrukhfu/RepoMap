@@ -20,7 +20,7 @@ export default function RepoInput({ onAnalyze, isLoading, initialUrl = "", compa
     { text: "Querying GitHub repository tree...", status: "active" },
     { text: "Filtering package structures & manifests...", status: "pending" },
     { text: "Extracting package.json & README.md configuration...", status: "pending" },
-    { text: "Sending payload to Gemini API for synthesis...", status: "pending" },
+    { text: "Sending payload to AI for synthesis...", status: "pending" },
     { text: "Building interactive database dashboards...", status: "pending" },
   ];
 

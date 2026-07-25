@@ -171,7 +171,7 @@ export default function DependencyAudit({ alerts, techStack }: DependencyAuditPr
               <div className="space-y-2">
                 <h3 className="font-headline-sm text-headline-sm text-primary">Codebase Audited Clean</h3>
                 <p className="text-sm text-on-surface-variant leading-relaxed font-sans">
-                  Gemini API did not detect high-risk vulnerable packages in standard configurations. All primary manifest dependencies align with secure baseline configurations.
+                  AI did not detect high-risk vulnerable packages in standard configurations. All primary manifest dependencies align with secure baseline configurations.
                 </p>
               </div>
             </div>
