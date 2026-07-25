@@ -7,6 +7,11 @@ interface SetupGuideProps {
   steps: string[];
 }
 
+interface ParsedStep {
+  description: string;
+  command?: string;
+}
+
 export default function SetupGuide({ steps }: SetupGuideProps) {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
@@ -14,6 +19,39 @@ export default function SetupGuide({ steps }: SetupGuideProps) {
     navigator.clipboard.writeText(text);
     setCopiedIndex(index);
     setTimeout(() => setCopiedIndex(null), 2000);
+  };
+
+  // Helper function to extract description and command from raw string
+  const parseStep = (step: string): ParsedStep => {
+    const codeRegex = /`([^`]+)`/;
+    const match = step.match(codeRegex);
+
+    let description = step;
+    let command: string | undefined = undefined;
+
+    if (match) {
+      command = match[1];
+      description = step.replace(codeRegex, "").trim();
+    }
+
+    // Clean up description (remove markdown bold tags **, leading numbers, trailing colons)
+    description = description.replace(/\*\*/g, "");
+    description = description.replace(/^(step\s+\d+[:.]*|^\d+[:.]*)\s*/i, "");
+    description = description.replace(/\b(using|with|via|by running|running|run)\s*[:\-]*$/, "");
+    description = description.replace(/[:\s-]+$/, "").trim();
+
+    // Check if the step is actually just a raw command without backticks
+    const commonCommandPrefixes = ["git ", "npm ", "yarn ", "pnpm ", "pip ", "python ", "docker ", "cargo ", "go ", "make ", "dotnet ", "composer "];
+    if (!command && commonCommandPrefixes.some(prefix => step.trim().toLowerCase().startsWith(prefix))) {
+      command = step.trim();
+      description = "Run setup command";
+    }
+
+    if (!description) {
+      description = command ? "Execute command" : "Setup step description";
+    }
+
+    return { description, command };
   };
 
   return (
@@ -39,39 +77,47 @@ export default function SetupGuide({ steps }: SetupGuideProps) {
               No configuration files parsed to deduce installation guides.
             </div>
           ) : (
-            steps.map((step, index) => (
-              <div
-                key={index}
-                className="bg-[#18181B] border border-outline-variant rounded-lg p-5 flex flex-col gap-3 relative group hover:border-[#6366F1]/30 transition-all duration-300"
-              >
-                {/* Step indicator */}
-                <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 rounded-full bg-secondary/15 flex items-center justify-center border border-secondary/30">
-                    <span className="text-xs font-bold text-secondary font-mono">{index + 1}</span>
+            steps.map((step, index) => {
+              const parsed = parseStep(step);
+              return (
+                <div
+                  key={index}
+                  className="bg-[#18181B] border border-outline-variant rounded-lg p-5 flex flex-col gap-3 relative group hover:border-[#6366F1]/30 transition-all duration-300"
+                >
+                  {/* Step indicator and description */}
+                  <div className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded-full bg-secondary/15 flex items-center justify-center border border-secondary/30 mt-0.5 shrink-0">
+                      <span className="text-xs font-bold text-secondary font-mono">{index + 1}</span>
+                    </div>
+                    <span className="font-semibold text-white text-sm font-sans leading-relaxed">
+                      {parsed.description}
+                    </span>
                   </div>
-                  <span className="font-semibold text-primary text-sm font-sans">Procedure Step</span>
-                </div>
 
-                {/* Step Text / Code Block */}
-                <div className="flex items-start justify-between bg-[#09090B] border-base p-4 rounded text-code-md font-mono leading-relaxed text-[#A1A1AA] select-all">
-                  <div className="pr-4">{step}</div>
-                  <button
-                    onClick={() => handleCopy(step, index)}
-                    className="p-1 text-on-surface-variant hover:text-white hover:bg-surface-container rounded transition-colors shrink-0 outline-none"
-                    title="Copy step command"
-                  >
-                    {copiedIndex === index ? (
-                      <Check className="w-4 h-4 text-emerald-400" />
-                    ) : (
-                      <Copy className="w-4 h-4" />
-                    )}
-                  </button>
+                  {/* Step Text / Code Block if command exists */}
+                  {parsed.command && (
+                    <div className="flex items-start justify-between bg-[#09090B] border-base p-4 rounded text-code-md font-mono leading-relaxed text-[#A1A1AA] select-all mt-1">
+                      <div className="pr-4 break-all">{parsed.command}</div>
+                      <button
+                        onClick={() => handleCopy(parsed.command!, index)}
+                        className="p-1 text-on-surface-variant hover:text-white hover:bg-surface-container rounded transition-colors shrink-0 outline-none cursor-pointer"
+                        title="Copy command"
+                      >
+                        {copiedIndex === index ? (
+                          <Check className="w-4 h-4 text-emerald-400" />
+                        ) : (
+                          <Copy className="w-4 h-4" />
+                        )}
+                      </button>
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))
+              );
+            })
           )}
         </section>
       </div>
     </div>
   );
 }
+
