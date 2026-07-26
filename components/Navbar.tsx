@@ -2,6 +2,7 @@
 
 import React from "react";
 import RepoInput from "./RepoInput";
+import { Github } from "lucide-react";
 
 
 interface NavbarProps {
@@ -38,6 +39,18 @@ export default function Navbar({ onAnalyze, isLoading, currentUrl, showInput }: 
           <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
           <span className="text-label-sm text-on-surface-variant font-medium">GitHub Status</span>
         </div>
+
+        {/* GitHub Repository Link */}
+        <a
+          href="https://github.com/shahrukhfu/RepoMap"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-on-surface-variant hover:text-white transition-colors flex items-center justify-center"
+          title="View GitHub Repository"
+        >
+          <Github className="w-5 h-5" />
+        </a>
+
         <div className="w-8 h-8 border-base rounded-full overflow-hidden flex items-center justify-center bg-surface-container-low hover:bg-surface-container-highest cursor-pointer transition-colors">
           <span className="material-symbols-outlined text-primary text-lg">person</span>
         </div>
