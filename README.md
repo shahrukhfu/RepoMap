@@ -79,8 +79,6 @@ Below is an animated vector flow diagram showing how RepoMap parses data dynamic
 
 ## The AI Architecture and Prompt Engineering
 
-<details>
-<summary><b>Click to expand AI System Prompts and Prompts Specifications</b></summary>
 
 RepoMap implements two distinct AI roles using the `gemini-2.5-flash` model.
 
@@ -113,7 +111,6 @@ This module powers the interactive chat drawer, helping developers find applicat
   ```text
   Answer developer questions about the repository structures, file paths, logic setup, and configuration layout clearly. Use concise Markdown format, code blocks where appropriate, and cite specific folders or files.
   ```
-</details>
 
 ---
 
@@ -132,8 +129,6 @@ RepoMap is built using modern cloud solutions and frameworks:
 
 ## How to Run locally
 
-<details>
-<summary><b>Click to expand Installation and Running Guide</b></summary>
 
 ### 1. Clone the repository
 ```bash
@@ -172,4 +167,3 @@ If your local internet connection is experiencing IPv6 DNS timeout loops when re
   ```
 
 Open **[http://localhost:3000](http://localhost:3000)** in your browser to view the application.
-</details>
