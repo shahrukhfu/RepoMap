@@ -66,6 +66,12 @@ Below is an animated vector flow diagram showing how RepoMap parses data dynamic
 
 ## Features List
 
+<div align="center">
+  <img src="./public/features_matrix.svg" alt="RepoMap Features Matrix" width="100%">
+</div>
+
+<br>
+
 * **GitHub Tree Parsing and Manifest Indexing**: Fetch, filter, and parse file structures and root-level configuration manifests via the GitHub REST API.
 * **AI-Powered Codebase Synthesis**: Multi-dimensional analysis powered by Google's Gemini API, producing titles, technical stack logs, structured guides, and threat scopes.
 * **Dependency Risk Auditing**: Scans parsed manifests to identify high-risk package versions and provides direct terminal commands to patch them.
