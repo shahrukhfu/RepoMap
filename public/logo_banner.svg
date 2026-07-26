@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="100%" height="100%">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#09090b"/>
+      <stop offset="100%" stop-color="#18181b"/>
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="50%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    
+    <!-- CSS Animations -->
+    <style>
+      @keyframes pulse {
+        0% { transform: scale(1); opacity: 0.7; }
+        50% { transform: scale(1.05); opacity: 1; }
+        100% { transform: scale(1); opacity: 0.7; }
+      }
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-5px); }
+        100% { transform: translateY(0px); }
+      }
+      @keyframes drawLine {
+        0% { stroke-dashoffset: 1000; }
+        100% { stroke-dashoffset: 0; }
+      }
+      @keyframes glow {
+        0% { filter: drop-shadow(0 0 2px #6366f1); }
+        50% { filter: drop-shadow(0 0 8px #a855f7); }
+        100% { filter: drop-shadow(0 0 2px #6366f1); }
+      }
+      .bg { fill: url(#bgGrad); }
+      .title { font-family: 'Outfit', 'Inter', sans-serif; font-weight: 800; font-size: 54px; fill: #ffffff; letter-spacing: 2px; }
+      .subtitle { font-family: 'Inter', sans-serif; font-size: 16px; fill: #a1a1aa; font-weight: 500; letter-spacing: 4px; }
+      .animated-node { transform-origin: center; }
+      .node-1 { animation: pulse 3s infinite ease-in-out; animation-delay: 0s; }
+      .node-2 { animation: pulse 3s infinite ease-in-out; animation-delay: 0.8s; }
+      .node-3 { animation: pulse 3s infinite ease-in-out; animation-delay: 1.5s; }
+      .connection-line { stroke: #6366f1; stroke-width: 1.5; stroke-dasharray: 8, 4; animation: drawLine 30s linear infinite; }
+      .logo-mark { animation: float 4s infinite ease-in-out, glow 4s infinite ease-in-out; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="200" rx="16" class="bg" stroke="#27272a" stroke-width="1.5"/>
+
+  <!-- Logo Icon / Mark -->
+  <g class="logo-mark" transform="translate(100, 100)">
+    <!-- Animated Network / Code map elements -->
+    <path d="M -40 -30 L 0 30 L 40 -30 Z" fill="none" stroke="#a855f7" stroke-width="2" opacity="0.3"/>
+    <line x1="-40" y1="-30" x2="40" y2="-30" class="connection-line"/>
+    <line x1="-40" y1="-30" x2="0" y2="30" class="connection-line"/>
+    <line x1="40" y1="-30" x2="0" y2="30" class="connection-line"/>
+    
+    <circle cx="-40" cy="-30" r="8" fill="#6366f1" class="animated-node node-1"/>
+    <circle cx="40" cy="-30" r="8" fill="#a855f7" class="animated-node node-2"/>
+    <circle cx="0" cy="30" r="10" fill="#ffffff" class="animated-node node-3"/>
+    
+    <!-- Central pulse -->
+    <circle cx="0" cy="30" r="4" fill="#6366f1"/>
+  </g>
+
+  <!-- Text elements -->
+  <g transform="translate(200, 105)">
+    <text x="0" y="0" class="title">REPOMAP</text>
+    <text x="5" y="32" class="subtitle">AI CODEBASE ANALYSIS DASHBOARD</text>
+  </g>
+
+  <!-- Decorative subtle grid -->
+  <g opacity="0.05">
+    <path d="M 0 40 L 800 40 M 0 80 L 800 80 M 0 120 L 800 120 M 0 160 L 800 160" stroke="#ffffff" stroke-width="1"/>
+    <path d="M 100 0 L 100 200 M 200 0 L 200 200 M 300 0 L 300 200 M 400 0 L 400 200 M 500 0 L 500 200 M 600 0 L 600 200 M 700 0 L 700 200" stroke="#ffffff" stroke-width="1"/>
+  </g>
+</svg>

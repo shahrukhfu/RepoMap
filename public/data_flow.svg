@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 220" width="100%" height="100%">
+  <defs>
+    <!-- Styling -->
+    <style>
+      @keyframes dash {
+        to { stroke-dashoffset: -40; }
+      }
+      .flow-line {
+        stroke: #6366f1;
+        stroke-width: 2;
+        stroke-dasharray: 8, 4;
+        animation: dash 2s linear infinite;
+        fill: none;
+      }
+      .box {
+        fill: #18181b;
+        stroke: #27272a;
+        stroke-width: 1.5;
+        rx: 8;
+        transition: all 0.3s;
+      }
+      .box:hover {
+        stroke: #6366f1;
+        fill: #202024;
+      }
+      .text-title {
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        font-size: 14px;
+        fill: #ffffff;
+      }
+      .text-desc {
+        font-family: 'Inter', sans-serif;
+        font-size: 11px;
+        fill: #a1a1aa;
+      }
+      .header {
+        font-family: 'Inter', sans-serif;
+        font-size: 10px;
+        font-weight: 700;
+        fill: #6366f1;
+        letter-spacing: 2px;
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="220" rx="12" fill="#09090b" stroke="#27272a" stroke-width="1.5"/>
+
+  <!-- Connections -->
+  <!-- Line 1: User Input to Next.js API -->
+  <path d="M 160 110 L 250 110" class="flow-line" />
+  
+  <!-- Line 2: Next.js API to Gemini API (Upwards curve) -->
+  <path d="M 380 95 C 430 40, 470 40, 510 70" class="flow-line" style="stroke: #a855f7; animation-duration: 1.5s;" />
+  
+  <!-- Line 3: Next.js API to MongoDB (Downwards curve) -->
+  <path d="M 380 125 C 430 180, 470 180, 510 150" class="flow-line" style="stroke: #10b981; animation-duration: 2.5s;" />
+
+  <!-- Line 4: MongoDB/Gemini back to Dashboard -->
+  <path d="M 640 70 C 660 80, 665 95, 680 95" class="flow-line" style="stroke: #ffffff; animation-duration: 3s;" />
+  <path d="M 640 150 C 660 140, 665 125, 680 125" class="flow-line" style="stroke: #ffffff; animation-duration: 3s;" />
+
+  <!-- Box 1: User / Git Repo URL -->
+  <g transform="translate(30, 70)">
+    <rect width="130" height="80" class="box" />
+    <text x="15" y="25" class="header">INPUT</text>
+    <text x="15" y="45" class="text-title">GitHub URL</text>
+    <text x="15" y="62" class="text-desc">Target Repository</text>
+  </g>
+
+  <!-- Box 2: Next.js Serverless APIs -->
+  <g transform="translate(250, 70)">
+    <rect width="130" height="80" class="box" style="stroke: #6366f1;" />
+    <text x="15" y="25" class="header" style="fill: #818cf8;">CORE ENGINE</text>
+    <text x="15" y="45" class="text-title">Next.js APIs</text>
+    <text x="15" y="62" class="text-desc">Parser &amp; router</text>
+  </g>
+
+  <!-- Box 3: Google Gemini API (AI Synthesis) -->
+  <g transform="translate(510, 30)">
+    <rect width="130" height="60" class="box" />
+    <text x="15" y="20" class="header" style="fill: #c084fc;">AI ENGINE</text>
+    <text x="15" y="38" class="text-title">Gemini 2.5</text>
+    <text x="15" y="50" class="text-desc">Code synthesis</text>
+  </g>
+
+  <!-- Box 4: MongoDB Atlas (Cached Results) -->
+  <g transform="translate(510, 130)">
+    <rect width="130" height="60" class="box" />
+    <text x="15" y="20" class="header" style="fill: #34d399;">DATABASE</text>
+    <text x="15" y="38" class="text-title">MongoDB</text>
+    <text x="15" y="50" class="text-desc">24-hour cache</text>
+  </g>
+
+  <!-- Box 5: Premium Dashboard Visualizer -->
+  <g transform="translate(680, 70)">
+    <rect width="90" height="80" class="box" style="fill: #1e1b4b; stroke: #4f46e5;" />
+    <text x="12" y="25" class="header" style="fill: #a5b4fc;">UI</text>
+    <text x="12" y="45" class="text-title">Dashboard</text>
+    <text x="12" y="62" class="text-desc">Interactive views</text>
+  </g>
+</svg>

@@ -1,15 +1,19 @@
 # RepoMap
 
 <div align="center">
+  <img src="./public/logo_banner.svg" alt="RepoMap Header Banner" width="100%">
+</div>
 
-![RepoMap Header](https://img.shields.io/badge/RepoMap-AI%20Codebase%20Visualizer-6366F1?style=for-the-badge&logo=github)
-![Next.js](https://img.shields.io/badge/next.js-v16.2-000000?style=for-the-badge&logo=nextdotjs)
-![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb)
-![Gemini 2.5 Flash](https://img.shields.io/badge/Gemini%202.5%20Flash-AI%20Synthesis-8E43E7?style=for-the-badge&logo=google)
+<div align="center">
+
+![RepoMap Badge](https://img.shields.io/badge/RepoMap-AI%20Codebase%20Visualizer-6366F1?style=for-the-badge&logo=github)
+![Next.js Badge](https://img.shields.io/badge/next.js-v16.2-000000?style=for-the-badge&logo=nextdotjs)
+![MongoDB Badge](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb)
+![Gemini 2.5 Flash Badge](https://img.shields.io/badge/Gemini%202.5%20Flash-AI%20Synthesis-8E43E7?style=for-the-badge&logo=google)
 
 **RepoMap** automatically parses, analyzes, and visualizes any GitHub repository structure, generating premium dark-themed developer dashboards and interactive AI assistance in seconds.
 
-🌐 **[Live Deployed URL](https://repomap-shahrukhfu.vercel.app)** *(Update with your custom Vercel subdomain if different)*
+**[Live Deployed URL](https://repomap-ten.vercel.app)**
 
 </div>
 
@@ -50,6 +54,16 @@ An active conversational AI drawer docked to the screen, allowing users to query
 
 ---
 
+## System Architecture and Data Flow
+
+Below is an animated vector flow diagram showing how RepoMap parses data dynamically:
+
+<div align="center">
+  <img src="./public/data_flow.svg" alt="RepoMap Data Flow" width="100%">
+</div>
+
+---
+
 ## Features List
 
 * **GitHub Tree Parsing and Manifest Indexing**: Fetch, filter, and parse file structures and root-level configuration manifests via the GitHub REST API.
@@ -64,6 +78,9 @@ An active conversational AI drawer docked to the screen, allowing users to query
 ---
 
 ## The AI Architecture and Prompt Engineering
+
+<details>
+<summary><b>Click to expand AI System Prompts and Prompts Specifications</b></summary>
 
 RepoMap implements two distinct AI roles using the `gemini-2.5-flash` model.
 
@@ -96,6 +113,7 @@ This module powers the interactive chat drawer, helping developers find applicat
   ```text
   Answer developer questions about the repository structures, file paths, logic setup, and configuration layout clearly. Use concise Markdown format, code blocks where appropriate, and cite specific folders or files.
   ```
+</details>
 
 ---
 
@@ -113,6 +131,9 @@ RepoMap is built using modern cloud solutions and frameworks:
 ---
 
 ## How to Run locally
+
+<details>
+<summary><b>Click to expand Installation and Running Guide</b></summary>
 
 ### 1. Clone the repository
 ```bash
@@ -151,3 +172,4 @@ If your local internet connection is experiencing IPv6 DNS timeout loops when re
   ```
 
 Open **[http://localhost:3000](http://localhost:3000)** in your browser to view the application.
+</details>
