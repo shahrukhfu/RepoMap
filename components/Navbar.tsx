@@ -51,10 +51,6 @@ export default function Navbar({ onAnalyze, isLoading, currentUrl, showInput }: 
           <Github className="w-4 h-4 text-secondary" />
           <span className="text-[12px] font-sans">GitHub</span>
         </a>
-
-        <div className="w-8 h-8 border-base rounded-full overflow-hidden flex items-center justify-center bg-surface-container-low hover:bg-surface-container-highest cursor-pointer transition-colors">
-          <span className="material-symbols-outlined text-primary text-lg">person</span>
-        </div>
       </div>
     </header>
   );
