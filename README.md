@@ -123,7 +123,7 @@ This module powers the interactive chat drawer, helping developers find applicat
 ## Stack, Services and Tools
 
 <div align="center">
-  <img src="./public/tech_stack.svg" alt="RepoMap Tech Stack" width="100%">
+  <img src="./public/tech_dashboard.svg" alt="RepoMap Tech Stack" width="100%">
 </div>
 
 <br>
