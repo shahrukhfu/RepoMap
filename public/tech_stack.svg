@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 160" width="100%" height="100%">
+  <defs>
+    <!-- Animation definitions -->
+    <style>
+      @keyframes float1 {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-5px); }
+      }
+      @keyframes float2 {
+        0%, 100% { transform: translateY(-3px); }
+        50% { transform: translateY(2px); }
+      }
+      @keyframes pulse {
+        0%, 100% { filter: drop-shadow(0 0 2px rgba(99, 102, 241, 0.2)); }
+        50% { filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.6)); }
+      }
+      @keyframes pulsePurple {
+        0%, 100% { filter: drop-shadow(0 0 2px rgba(168, 85, 247, 0.2)); }
+        50% { filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.6)); }
+      }
+      @keyframes pulseGreen {
+        0%, 100% { filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.2)); }
+        50% { filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.6)); }
+      }
+      @keyframes pulseBlue {
+        0%, 100% { filter: drop-shadow(0 0 2px rgba(56, 189, 248, 0.2)); }
+        50% { filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.6)); }
+      }
+      
+      .tech-card {
+        fill: #18181b;
+        stroke: #27272a;
+        stroke-width: 1.5;
+        rx: 12;
+      }
+      .tech-title {
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        fill: #ffffff;
+      }
+      .tech-subtitle {
+        font-family: 'Inter', sans-serif;
+        font-size: 10px;
+        fill: #71717a;
+      }
+      
+      /* Apply animations to card groups */
+      .card-frontend { animation: float1 4s infinite ease-in-out, pulse 4s infinite alternate; }
+      .card-ai { animation: float2 4s infinite ease-in-out, pulsePurple 4s infinite alternate; }
+      .card-db { animation: float1 4s infinite ease-in-out, pulseGreen 4s infinite alternate; }
+      .card-styling { animation: float2 4s infinite ease-in-out, pulseBlue 4s infinite alternate; }
+      .card-hosting { animation: float1 4s infinite ease-in-out; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="160" rx="12" fill="#09090b" stroke="#27272a" stroke-width="1.5"/>
+
+  <!-- Frontend Card (Next.js & React) -->
+  <g class="card-frontend" transform="translate(30, 40)">
+    <rect width="130" height="80" class="tech-card" style="stroke: #6366f1;" />
+    <!-- React Logo representation -->
+    <ellipse cx="30" cy="40" rx="10" ry="4" fill="none" stroke="#6366f1" stroke-width="1.2" transform="rotate(30 30 40)"/>
+    <ellipse cx="30" cy="40" rx="10" ry="4" fill="none" stroke="#6366f1" stroke-width="1.2" transform="rotate(-30 30 40)"/>
+    <circle cx="30" cy="40" r="2" fill="#6366f1"/>
+    
+    <text x="52" y="38" class="tech-title">Next.js 16</text>
+    <text x="52" y="52" class="tech-subtitle">React 19</text>
+  </g>
+
+  <!-- Styling Card (Tailwind CSS) -->
+  <g class="card-styling" transform="translate(180, 40)">
+    <rect width="130" height="80" class="tech-card" style="stroke: #38bdf8;" />
+    <!-- Tailwind Logo representation -->
+    <path d="M 22 40 C 26 36, 30 36, 34 40 C 38 44, 42 44, 46 40 C 42 44, 38 44, 34 40 C 30 36, 26 36, 22 40 Z" fill="#38bdf8" />
+    <path d="M 18 45 C 22 41, 26 41, 30 45 C 34 49, 38 49, 42 45 C 38 49, 34 49, 30 45 C 26 41, 22 41, 18 45 Z" fill="#38bdf8" opacity="0.7" />
+    
+    <text x="52" y="38" class="tech-title">Tailwind</text>
+    <text x="52" y="52" class="tech-subtitle">CSS v4</text>
+  </g>
+
+  <!-- AI Model Card (Gemini 2.5 Flash) -->
+  <g class="card-ai" transform="translate(330, 40)">
+    <rect width="130" height="80" class="tech-card" style="stroke: #a855f7;" />
+    <!-- Google Star representation -->
+    <path d="M 30 28 L 33 35 L 40 38 L 33 41 L 30 48 L 27 41 L 20 38 L 27 35 Z" fill="#a855f7" />
+    
+    <text x="52" y="38" class="tech-title">Gemini 2.5</text>
+    <text x="52" y="52" class="tech-subtitle">Flash Model</text>
+  </g>
+
+  <!-- Database Card (MongoDB Atlas) -->
+  <g class="card-db" transform="translate(480, 40)">
+    <rect width="130" height="80" class="tech-card" style="stroke: #10b981;" />
+    <!-- MongoDB Leaf representation -->
+    <path d="M 30 25 C 25 35, 25 45, 30 55 C 35 45, 35 35, 30 25 Z" fill="#10b981" />
+    
+    <text x="52" y="38" class="tech-title">MongoDB</text>
+    <text x="52" y="52" class="tech-subtitle">Atlas Cache</text>
+  </g>
+
+  <!-- Hosting Card (Vercel) -->
+  <g class="card-hosting" transform="translate(630, 40)">
+    <rect width="130" height="80" class="tech-card" style="stroke: #ffffff;" />
+    <!-- Vercel Triangle Logo -->
+    <polygon points="30,28 42,48 18,48" fill="#ffffff" />
+    
+    <text x="52" y="38" class="tech-title">Vercel</text>
+    <text x="52" y="52" class="tech-subtitle">Hosting</text>
+  </g>
+</svg>

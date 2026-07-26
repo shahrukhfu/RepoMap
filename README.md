@@ -122,6 +122,12 @@ This module powers the interactive chat drawer, helping developers find applicat
 
 ## Stack, Services and Tools
 
+<div align="center">
+  <img src="./public/tech_stack.svg" alt="RepoMap Tech Stack" width="100%">
+</div>
+
+<br>
+
 RepoMap is built using modern cloud solutions and frameworks:
 
 * **Core Framework**: [Next.js 16 (App Router)](https://nextjs.org/) & [React 19](https://react.dev/)
