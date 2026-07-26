@@ -45,10 +45,11 @@ export default function Navbar({ onAnalyze, isLoading, currentUrl, showInput }: 
           href="https://github.com/shahrukhfu/RepoMap"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-on-surface-variant hover:text-white transition-colors flex items-center justify-center"
+          className="flex items-center gap-2 px-3 py-1.5 border border-outline-variant bg-surface-container hover:bg-surface-container-highest hover:border-[#6366F1]/50 rounded-lg text-label-sm font-medium transition-all text-white cursor-pointer select-none"
           title="View GitHub Repository"
         >
-          <Github className="w-5 h-5" />
+          <Github className="w-4 h-4 text-secondary" />
+          <span className="text-[12px] font-sans">GitHub</span>
         </a>
 
         <div className="w-8 h-8 border-base rounded-full overflow-hidden flex items-center justify-center bg-surface-container-low hover:bg-surface-container-highest cursor-pointer transition-colors">
