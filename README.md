@@ -67,7 +67,7 @@ Below is an animated vector flow diagram showing how RepoMap parses data dynamic
 ## Features List
 
 <div align="center">
-  <img src="./public/features_matrix.svg" alt="RepoMap Features Matrix" width="100%">
+  <img src="./public/features_dashboard.svg" alt="RepoMap Features Matrix" width="100%">
 </div>
 
 <br>
