@@ -7,8 +7,8 @@
         50% { opacity: 1; }
       }
       @keyframes growBar {
-        0% { width: 0%; }
-        100% { width: 75%; }
+        0% { transform: scaleX(0); }
+        100% { transform: scaleX(1); }
       }
       @keyframes writeMessage {
         0%, 100% { opacity: 0; transform: translateY(5px); }
@@ -45,7 +45,10 @@
       .circle-3 { animation-delay: 1s; }
       
       /* Panel 2 animations */
-      .risk-bar { animation: growBar 3s cubic-bezier(0.1, 0.8, 0.2, 1) infinite alternate; }
+      .risk-bar {
+        animation: growBar 3s cubic-bezier(0.1, 0.8, 0.2, 1) infinite alternate;
+        transform-origin: left;
+      }
       .danger-dot { animation: pulse 1s infinite alternate; }
 
       /* Panel 3 animations */
@@ -116,23 +119,29 @@
     <rect width="230" height="180" class="panel-bg" style="stroke: #a855f7; stroke-opacity: 0.3;" />
     <text x="15" y="25" class="panel-header" style="fill: #c084fc;">CONVERSATIONAL AI</text>
     
-    <!-- Chat Drawer Simulation -->
+    <!-- Chat Drawer Simulation with wrapper positioning -->
     <g transform="translate(15, 45)">
       <!-- Chat bubbles -->
-      <g class="chat-msg-1">
-        <rect x="0" y="0" width="160" height="24" rx="4" fill="#27272a" />
-        <text x="10" y="15" fill="#e4e4e7" font-size="10px">Where is the entry point?</text>
+      <g transform="translate(0, 0)">
+        <g class="chat-msg-1">
+          <rect x="0" y="0" width="160" height="24" rx="4" fill="#27272a" />
+          <text x="10" y="15" fill="#e4e4e7" font-size="10px">Where is the entry point?</text>
+        </g>
       </g>
       
-      <g class="chat-msg-2" transform="translate(20, 32)">
-        <rect x="0" y="0" width="180" height="34" rx="4" fill="#4c1d95" />
-        <text x="10" y="15" fill="#f3e8ff" font-size="9px" font-weight="600">The main entry is located</text>
-        <text x="10" y="25" fill="#f3e8ff" font-size="9px" font-weight="600">inside app/page.tsx</text>
+      <g transform="translate(20, 32)">
+        <g class="chat-msg-2">
+          <rect x="0" y="0" width="180" height="34" rx="4" fill="#4c1d95" />
+          <text x="10" y="15" fill="#f3e8ff" font-size="9px" font-weight="600">The main entry is located</text>
+          <text x="10" y="25" fill="#f3e8ff" font-size="9px" font-weight="600">inside app/page.tsx</text>
+        </g>
       </g>
 
-      <g class="chat-msg-3" transform="translate(0, 72)">
-        <rect x="0" y="0" width="140" height="20" rx="4" fill="#27272a" />
-        <text x="10" y="13" fill="#e4e4e7" font-size="9px">Thanks! How do I run it?</text>
+      <g transform="translate(0, 72)">
+        <g class="chat-msg-3">
+          <rect x="0" y="0" width="140" height="20" rx="4" fill="#27272a" />
+          <text x="10" y="13" fill="#e4e4e7" font-size="9px">Thanks! How do I run it?</text>
+        </g>
       </g>
     </g>
     
